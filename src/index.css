@@ -11,3 +11,75 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.nav-link {
+  margin-right: 20px;
+  transition: margin 0.3s;
+}
+.nav-link:hover {
+  margin-right: 40px;
+  background-color: green;
+  color: #fff;
+  forced-color-adjust: #fff;
+  border-radius: 5px;
+}
+.nav-link:active {
+  margin-right: 40px;
+  background-color: #803c9b;
+  color: #fff;
+  forced-color-adjust: #fff;
+  border-radius: 5px;
+}
+
+/* center a class called card and have it a little bit of padding and lower from navbar*/
+.card {
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* .chart {
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  width: 10%;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
+
+
+.chart {
+  width: 50%;
+  padding-left: 20px;
+  overflow: hidden;
+  height: 0; /* Set initial height to 0 */
+  transition: height 1s; /* Add a transition for the height property */
+}
+.chart1 {
+  width: 50%;
+  padding-left: 20px;
+  overflow: hidden;
+  height: 0; /* Set initial height to 0 */
+  transition: height 1s; /* Add a transition for the height property */
+}
+
+/* Apply a class to trigger the animation when needed */
+.animate {
+  .chart {
+    height: auto; /* Set to auto to allow the charts to expand */
+  }
+}
+.img {
+  background-blend-mode: multiply;
+  max-width: 100%;
+  max-height: 200px;
+}
+
+
+
