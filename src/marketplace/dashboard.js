@@ -65,6 +65,27 @@ const userData = {
         },
       ],
     },
+    //goats
+    {
+      id: 4,
+      name: "Goat",
+      price: 10000,
+      quantity: 10,
+      image:
+        "https://media.istockphoto.com/id/1357867624/photo/two-young-goats-and-one-buck-poses-to-camera.jpg?s=2048x2048&w=is&k=20&c=ivEnWbU1Y3If3wfL2Ut0VJCDG_q7J4mUTRgnpX2zWRI=",
+      orders: [
+        {
+          id: 1,
+          quantity: 5,
+          date: "2021-08-01",
+        },
+        {
+          id: 2,
+          quantity: 3,
+          date: "2021-08-02",
+        },
+      ],
+    },
   ],
   messages: [
     {

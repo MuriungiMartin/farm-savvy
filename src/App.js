@@ -5,6 +5,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Weather from "./Weather";
 import UserDashboard from "./marketplace/dashboard";
+import Footer from "./footer";
+import DarkVariantExample from "./landingpage";
+import { FaHome } from "react-icons/fa";
+import BackToTopButton from "./backtotop";
+
+
 export default function App() {
   return (
     <div className="App">
@@ -35,14 +41,11 @@ function NavBar() {
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <a class="navbar-brand mt-2 mt-lg-0" href="./index.html">
-                <img
-                  src="./logo192.png"
-                  height="25"
-                  alt="Farm Savvy"
-                  loading="lazy"
-                />
-              </a>
+              <Link to="/" class="navbar-brand mt-2 mt-lg-0">
+                <Link to="/" className="navbar-brand mt-2 mt-lg-0">
+                  <FaHome className="me-2" />
+                </Link>
+              </Link>
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <Link to="/weather" class="nav-link">
@@ -83,29 +86,36 @@ function NavBar() {
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="outline-success">Search</Button>
+                <Button variant="outline-success" style={{ margin: "10px" }}>
+                  Search
+                </Button>
               </Form>
               <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+                //src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+                src="https://i.pravatar.cc/400?img=70"
                 class="rounded-circle shadow-4"
                 width="50px"
                 alt="Avatar"
+                style={{ margin: "10px" }}
               />
               <span class="badge rounded-pill badge-notification bg-danger">
-               3
+                3
               </span>
             </div>
           </div>
         </nav>
         <br />
-        <br />
-        <br />
-
         <Routes>
           <Route path="/weather" element={<Weather />} />
           <Route path="/marketplace" element={<UserDashboard />} />
+          <Route path="/" element={<DarkVariantExample />} />
         </Routes>
       </Router>
+      <br />
+      <br />
+      <br />
+      <Footer />
+      <BackToTopButton />
     </div>
   );
 }

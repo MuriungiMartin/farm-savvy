@@ -46,18 +46,34 @@ function Weather() {
         // setLocation(
         //   `Latitude: ${latitude.toFixed(2)}, Longitude: ${longitude.toFixed(2)}`
         // );
-        console.log(latitude, longitude);
-          axios
-          .get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-          .then((response) => {
-            const locationData = response.data;
-            const locationName = locationData.name;
-
-            setLocation(locationName);
-          })
-          .catch((error) => {
-            console.error('Geocoding error:', error);
-          });
+         console.log(latitude, longitude);
+         axios
+        .get(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+        )
+        .then((response) => {
+          const locationData = response.data;
+          let locationName = locationData.name;
+          if (!locationName) {
+            locationName = "";
+            if (locationData.address.road) {
+              locationName += locationData.address.road + ", ";
+            }
+            if (locationData.address.suburb) {
+              locationName += locationData.address.suburb + ", ";
+            }
+            if (locationData.address.city) {
+              locationName += locationData.address.city + ", ";
+            }
+            if (locationData.address.country) {
+              locationName += locationData.address.country;
+            }
+          }
+          setLocation(locationName);
+        })
+        .catch((error) => {
+          console.error("Geocoding error:", error);
+        });
       });
     } else {
       setLocation("Geolocation is not supported by this browser.");
@@ -73,7 +89,6 @@ function Weather() {
     cloudCover: "Partly Cloudy", // Replace with actual cloud data
     rainfall: 5, // Replace with actual rainfall data
   };
-
 
   const [initialChartData, setInitialChartData] = useState({
     labels: allWeatherData.map((data) => data.day),
@@ -133,13 +148,14 @@ function Weather() {
         Weather Forecast Weekly
       </h4>
       <div className={`chart-container ${animateCharts ? "animate" : ""}`}>
-        <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }}>
           <div style={{ width: "50%", marginRight: "10px" }} className="chart">
             <LineChart chartData={initialChartData} />
           </div>
           <div style={{ width: "50%" }} className="chart">
             <BarChart chartData={initialChartData} />
           </div>
+        </div>
         </div>
         <br />
         <br />
@@ -150,9 +166,9 @@ function Weather() {
             marginBottom: "20px",
           }}
         >
-            Weather Forecast Monthy
-        </h4>        
-      </div>
+          Weather Forecast Monthy
+        </h4>
+      
       <div className={`chart-container ${animateCharts ? "animate" : ""}`}>
         <div style={{ display: "flex" }}>
           <div style={{ width: "50%", marginRight: "10px" }} className="chart">
@@ -162,8 +178,6 @@ function Weather() {
             <BarChart chartData={initialChartData} />
           </div>
         </div>
-
-        
       </div>
     </div>
   );
