@@ -1,17 +1,16 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 .nav-link {
   margin-right: 20px;
@@ -53,7 +52,6 @@ code {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 } */
 
-
 .chart {
   width: 50%;
   padding-left: 20px;
@@ -81,5 +79,36 @@ code {
   max-height: 200px;
 }
 
+.footerline {
+  height: 0px;
+  background: #b1b5bb;
+  box-shadow: 0px 8px 8px -4px rgba(24, 39, 75, 0.08),
+    0px 4px 6px -4px rgba(24, 39, 75, 0.12);
+  text-align: center;
+  margin-left: 117px;
+  margin-right: 117px;
+}
+.link {
+  color: #000;
+  background-color: grey;
+  border-color: #007bff;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+.link:hover {
+  color: #fff;
+  background-color: green;
+  border-color: purple;
+  text-decoration: none;
+.link:hover {
+  color: #fff;
+  background-color: green;
+  border-color: purple;
+  text-decoration: none;
+}
 
-
+}

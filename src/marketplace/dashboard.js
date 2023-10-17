@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import AddProduceListing from "./listnew";
+import { Modal } from "react-bootstrap";
 
 const userData = {
   username: "JohnDoe",
@@ -108,17 +110,17 @@ const userData = {
       comment: "Very satisfied with the product.",
     },
     {
-        id: 3,
-        user: "Mtemi bokono",
-        rating: 3,
-        comment: "Fast delivery, but the product quality could be better.",
+      id: 3,
+      user: "Mtemi bokono",
+      rating: 3,
+      comment: "Fast delivery, but the product quality could be better.",
     },
     {
-        id: 4,
-        user: "Mwelusi",
-        rating: 5,
-        comment: "Idili zaidi!!",
-    }
+      id: 4,
+      user: "Mwelusi",
+      rating: 5,
+      comment: "Idili zaidi!!",
+    },
   ],
 };
 
@@ -127,13 +129,19 @@ const UserDashboard = () => {
     userData,
   });
 
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
+  const handleshowModal = () => {
+    setShowModal(true);
+  };
 
-
-useEffect(() => {
+  useEffect(() => {
     // Fetch user data from an API
     setUser(userData);
-}, []);
+  }, []);
 
   return (
     //center the contents
@@ -149,6 +157,35 @@ useEffect(() => {
                 font-size="1.5rem"
               >
                 <strong>MY PRODUCE LISTINGS</strong>
+                <span style={{ marginLeft: "10px" }}>
+                  <Button variant="outline-success" className="float-right">
+                    {`Total Listings: ${user?.listings?.length}`}
+                  </Button>
+                </span>
+                <span style={{ marginLeft: "10px" }}>
+                  <Button
+                    variant="outline-success"
+                    className="float-right"
+                    onClick={handleshowModal}
+                  >
+                    ➕ Listing
+                  </Button>
+                </span>
+              </div>
+              <div>
+                <Modal show={showModal} onHide={handleCloseModal} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title className="text-center">Add Produce</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <AddProduceListing />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    {/* <Button variant="warning" onClick={handleCloseModal}>
+                      Exit
+                    </Button> */}
+                  </Modal.Footer>
+                </Modal>
               </div>
               <div class="container-fluid" padding-top="50px">
                 <div class="card-body">
@@ -164,8 +201,14 @@ useEffect(() => {
                               fontSize: "1rem",
                             }}
                           >
-                           <h3 style={{marginRight: "5px"}}> <strong>{listing.name}</strong></h3>
-                            <Button variant="outline-success" className="float-right">
+                            <h3 style={{ marginRight: "5px" }}>
+                              {" "}
+                              <strong>{listing.name}</strong>
+                            </h3>
+                            <Button
+                              variant="outline-success"
+                              className="float-right"
+                            >
                               {`Orders: ${listing.orders.length}`}
                             </Button>
                           </div>
@@ -176,11 +219,7 @@ useEffect(() => {
                             <p>
                               <strong>Quantity: KSH</strong> {listing.quantity}
                             </p>
-                            <img
-                              src={listing.image}
-                              alt=""
-                              className="img"
-                            />
+                            <img src={listing.image} alt="" className="img" />
                           </div>
                         </div>
                       ))}
@@ -215,15 +254,16 @@ useEffect(() => {
                               fontSize: "1rem",
                             }}
                           >
-                           <h3 style={{marginRight: "5px"}}> <strong>{review.user}</strong></h3>
+                            <h3 style={{ marginRight: "5px" }}>
+                              {" "}
+                              <strong>{review.user}</strong>
+                            </h3>
                             {/* <Button variant="outline-success" className="float-right">
                               {`Orders: ${review.orders.length}`}
                             </Button> */}
                           </div>
                           <div className="card-body text-center">
-                            <p>
-                              {review.comment}
-                            </p>
+                            <p>{review.comment}</p>
                             <p>
                               <strong>Rating: ⭐</strong> {review.rating}
                             </p>
@@ -245,7 +285,6 @@ useEffect(() => {
       </div>
     </div>
   );
-  
 };
 
 export default UserDashboard;

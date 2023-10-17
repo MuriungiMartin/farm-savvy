@@ -126,7 +126,7 @@ function Weather() {
       {
         //center the card and add some margin to the top
       }
-      <Card style={{ width: "18rem" }} class="card">
+      <Card style={{ width: "18rem", marginTop: "100px" }} class="card">
         <Card.Header>
           <h5>{Location}</h5>
         </Card.Header>

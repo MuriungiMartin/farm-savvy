@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Modal } from "react-bootstrap";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import {
   FaRegMap,
@@ -17,6 +17,8 @@ import {
   PiWaveTriangle,
   PiWaveformThin,
 } from "react-icons/pi";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const images = [
   {
@@ -151,6 +153,11 @@ const ourPartners = [
 ];
 
 const LandingPage = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
       <Carousel>
@@ -209,8 +216,30 @@ const LandingPage = () => {
               your craft to the next level!
             </p>
             <div className="text-center">
-              <Button variant="secondary">Get Started</Button>
+              <Button variant="secondary" onClick={handleShow}>
+                Get Started
+              </Button>
             </div>
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title style={{ textAlign: "center", fontSize: "2rem" }}>
+                    Select Your Category 2
+                  </Modal.Title>
+                </Modal.Header>
+              <Modal.Body>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Link to={"/Createseller"} className="link">
+                    Seller
+                  </Link>
+                  <br />
+                  <br />
+                  <Link to="/buyercreate" className="link">
+                    Buyer
+                  </Link>
+                </div>
+              </Modal.Body>
+              <Modal.Footer></Modal.Footer>
+            </Modal>
           </Col>
         </Row>
       </Container>
