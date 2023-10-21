@@ -11,7 +11,7 @@ function LineChart({ chartData }) {
     // return window.innerWidth >= 768 && window.innerWidth < 992;
     // }
     // function isDesktop() {
-    // return window.innerWidth >= 992;
+    // return window.innerWidth >= 992; 
     // }
     const options = {
         scales: {

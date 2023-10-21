@@ -12,24 +12,7 @@ code {
     monospace;
 }
 
-.nav-link {
-  margin-right: 20px;
-  transition: margin 0.3s;
-}
-.nav-link:hover {
-  margin-right: 40px;
-  background-color: green;
-  color: #fff;
-  forced-color-adjust: #fff;
-  border-radius: 5px;
-}
-.nav-link:active {
-  margin-right: 40px;
-  background-color: #803c9b;
-  color: #fff;
-  forced-color-adjust: #fff;
-  border-radius: 5px;
-}
+
 
 /* center a class called card and have it a little bit of padding and lower from navbar*/
 .card {
@@ -88,27 +71,23 @@ code {
   margin-left: 117px;
   margin-right: 117px;
 }
-.link {
-  color: #000;
-  background-color: grey;
-  border-color: #007bff;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  border-radius: 0.3rem;
-  text-decoration: none;
-  margin: 0 1rem;
-}
-.link:hover {
-  color: #fff;
-  background-color: green;
-  border-color: purple;
-  text-decoration: none;
-.link:hover {
-  color: #fff;
-  background-color: green;
-  border-color: purple;
-  text-decoration: none;
+
+
+.createseller {
+  background-color: "purple";
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
+.accountsign {
+  color: #fff;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  
 }

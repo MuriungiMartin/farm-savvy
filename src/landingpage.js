@@ -19,6 +19,7 @@ import {
 } from "react-icons/pi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import UserLogin from "./userlogin";
 
 const images = [
   {
@@ -158,6 +159,13 @@ const LandingPage = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleshowModal = () => {
+    setShowModal(true);
+  };
+
+
   return (
     <div>
       <Carousel>
@@ -216,18 +224,22 @@ const LandingPage = () => {
               your craft to the next level!
             </p>
             <div className="text-center">
-              <Button variant="secondary" onClick={handleShow}>
+              <Button variant="success" onClick={handleShow}>
                 Get Started
               </Button>
             </div>
             <Modal show={show} onHide={handleClose} centered>
-                <Modal.Header closeButton>
-                  <Modal.Title style={{ textAlign: "center", fontSize: "2rem" }}>
-                    Select Your Category 2
+              <Modal.Header closeButton>
+                <div style={{ marginLeft: "20px" }}>
+                  <Modal.Title
+                    style={{ textAlign: "center", fontSize: "1.5rem" }}
+                  >
+                    Select Your Category
                   </Modal.Title>
-                </Modal.Header>
+                </div>
+              </Modal.Header>
               <Modal.Body>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ display: "flex", justifyContent: "left" }}>
                   <Link to={"/Createseller"} className="link">
                     Seller
                   </Link>
@@ -238,7 +250,25 @@ const LandingPage = () => {
                   </Link>
                 </div>
               </Modal.Body>
-              <Modal.Footer></Modal.Footer>
+              <Modal.Footer style={{ display: "flex", justifyContent: "left" }}>
+                <div style={{ marginLeft: "20px" }}>
+                  <p>Already have an account?</p>
+                  <button className="link1" onClick={handleshowModal}>Login</button>
+                </div>
+              </Modal.Footer>
+            </Modal>
+            <Modal show={showModal} onHide={handleCloseModal} centered>
+              <Modal.Header closeButton>
+                <Modal.Title className="text-center">Login</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <UserLogin />
+              </Modal.Body>
+              <Modal.Footer>
+                {/* <Button variant="warning" onClick={handleCloseModal}>
+                      Exit
+                    </Button> */}
+              </Modal.Footer>
             </Modal>
           </Col>
         </Row>
