@@ -5,6 +5,8 @@ import { Button } from "react-bootstrap";
 import AddProduceListing from "./listnew";
 import { Modal } from "react-bootstrap";
 import OrderCard from "./vieworder";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const userData = {
 //   username: "JohnDoe",
@@ -134,6 +136,39 @@ const UserDashboard = () => {
     bio: "A passionate farmer.",
   };
 
+  
+  async function handleDeleteListing(id) {
+    if (window.confirm("Are you sure you want to delete this produce?", false)) {
+      const lUrl = `https://localhost:7228/api/Listings/produce?id=${id}`;
+      const response =  await fetch(lUrl, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      try {
+        const res =  await response.json();
+        console.log(res)
+        if (res.status === 200) {
+          toast.success("Listing deleted successfully");
+          setTimeout(() => {
+            window.location.reload();
+                      }, 3000);
+       
+        } else {
+          toast.error(res.message);
+          setTimeout(() => {
+            window.location.reload();
+                      }, 3000);
+        }
+      } catch (error) {
+
+        console.error(error);
+        
+      }
+    }
+  }
+
   async function getlistings() {
     const lUrl = `http://localhost:82/api/Listings/produce?username=${username}`;
     const response = await fetch(lUrl, {
@@ -142,39 +177,47 @@ const UserDashboard = () => {
         "Content-Type": "application/json",
       },
     });
-    const res = await response.json();
-    if (res.status === 200) {
-      var listings = res.data;
-      // Fetch orders for each listing
-      const updatedListings = await Promise.all(
-        listings.map(async (listing) => {
-          const orders = await getorders(listing.id);
-          return { ...listing, orders };
-        })
-      );
+    try {
+      const res = await response.json();
+      // Your code that uses the parsed JSON goes here
+      if (res.status === 200) {
+        var listings = res.data;
+        // Fetch orders for each listing
 
-      await setUser((prevState) => ({
-        ...prevState,
-        listings: updatedListings,
-      }));
-    } else {
-      //alert("Error loading listings");
+        const updatedListings = await Promise.all(
+          listings?.map(async (listing) => {
+            const orders = await getorders(listing.id);
+            return { ...listing, orders };
+          })
+        );
+
+        await setUser((prevState) => ({
+          ...prevState,
+          listings: updatedListings,
+        }));
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
   async function getorders(listId) {
-    const lUrl = `http://localhost:82/api/Orders/listing?listingId=${listId}`;
+    const lUrl = `http://localhost:82/api/Orders/orders.listingid?listingid=${listId}`;
     const response = await fetch(lUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const res = await response.json();
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      //   alert("Error loading listings");
+    try {
+      const res = await response.json();
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        //   alert("Error loading listings");
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -284,13 +327,28 @@ const UserDashboard = () => {
                                 <strong>{listing.name}</strong>
                               </h3>
                               <Button
-                                variant="warning"
+                                variant="outline-warning"
                                 className="float-right"
-                                style={{ marginLeft: "10px", backgroundColor: "#ffc107", color: "#fff", border: "none" }}
+                                style={{
+                                  marginLeft: "10px",
+                                  color: "#000",
+                                }}
                                 onClick={handleshowOrder}
                               >
                                 {`Orders: ${listing?.orders?.length}`}
                               </Button>
+                              <span>
+                                <Button
+                                  variant="outline-danger"
+                                  className="float-right"
+                                  style={{ marginLeft: "10px" }}
+                                  onClick={() =>
+                                    handleDeleteListing(listing.id)
+                                  }
+                                >
+                                  🗑️
+                                </Button>
+                              </span>
                             </div>
                             <div className="card-body text-center">
                               <p>
@@ -363,6 +421,17 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

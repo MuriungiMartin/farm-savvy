@@ -34,6 +34,30 @@ function getUserimage()
   };
 }
 
+async function getTotalOrders()
+{
+  const url = `http://localhost:82/api/Orders/orders.sellername?sellername=${localStorage.getItem("username")}`;
+  const response = await fetch(url,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  try {
+    const res = await response.json();
+    if (res.status === 200) {
+      localStorage.setItem("totalOrders", res.data.length);
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
+  
+}
+
 
 const [showModal, setShowModal] = useState(false);
 const handleClosemodal = () => setShowModal(false);
@@ -53,6 +77,7 @@ const signOut = () => {
 useEffect(() => {
   setImage();
   getUserimage();
+  getTotalOrders();
 }
 ,[]);
 
@@ -131,7 +156,7 @@ useEffect(() => {
                     Livestock
                   </a>
                 </li>
-                <NavDropdown title="Savvy Marketplace" show={showDropdownMarket} onMouseEnter={() => setShowDropdownMarket(true)} onMouseLeave={() => setShowDropdownMarket(false)}>
+                <NavDropdown title="Savvy Marketplace" show={showDropdownMarket} onMouseEnter={() => setShowDropdownMarket(true)} onMouseUp={() => setShowDropdownMarket(false)}>
                     <Link to="/marketplace" className="dropdown-item">
                       Seller
                     </Link>
@@ -190,7 +215,7 @@ useEffect(() => {
               {localStorage.getItem("username")}
               </span>
               <span class="badge rounded-pill badge-notification bg-danger" style={{margin: "10px"}}>
-                3
+                {localStorage.getItem("totalOrders")}
               </span>
                  <button style={{marginLeft: "30px"}}>
                   <FaSignOutAlt onClick={signOut}/>

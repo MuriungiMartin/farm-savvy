@@ -61,6 +61,9 @@ function Createseller() {
         } else {
           // res = JSON.parse(this.responseText);
           toast.error(this.responseText);
+          setTimeout(() => {
+            window.location.href = "/marketplace";
+          }, 3000);
         }
       };
     };

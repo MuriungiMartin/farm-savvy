@@ -35,6 +35,9 @@ const UserLogin = () => {
                 }, 3000);
             } else {
                 toast.error(this.responseText);
+                setTimeout(() => {
+                 window.location.href = "/marketplace";
+                }, 3000);
             }
         };
     };

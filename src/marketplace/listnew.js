@@ -79,6 +79,10 @@ function AddProduceListing() {
         }
         else {
             toast.error(res.message);
+            setTimeout(() => {
+                window.location.href = "/marketplace";
+                }
+            , 3000);
         }
     };
 };
@@ -90,6 +94,10 @@ function AddProduceListing() {
       }
       else{
         toast.error("Please upload an image");
+        setTimeout(() => {
+            window.location.reload();
+            }
+        , 3000);
       }
     
     };
