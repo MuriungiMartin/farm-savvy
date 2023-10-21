@@ -18,7 +18,7 @@ const username = localStorage.getItem("username");
 
 function getUserimage()
 {
-  const url = `https://localhost:7228/api/User/get userImage?username=${username}`;
+  const url = `http://localhost:82/api/User/userImage?username=${username}`;
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");

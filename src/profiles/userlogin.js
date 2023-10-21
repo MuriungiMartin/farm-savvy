@@ -13,7 +13,7 @@ const UserLogin = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // handle login logic here
-        const url = "https://localhost:7228/api/User/login";
+        const url = "http://localhost:82/api/User/login";
         const data = {
             username: username,
             password: password,

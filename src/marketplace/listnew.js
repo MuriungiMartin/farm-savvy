@@ -27,7 +27,7 @@ function AddProduceListing() {
   
   };
     const username = localStorage.getItem('username');
-    const url = "https://localhost:7228/api/Listings/add produce";
+    const url = "http://localhost:82/api/Listings/produce";
 
     const handleSubmit = async (event) => {
         event.preventDefault();

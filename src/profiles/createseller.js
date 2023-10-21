@@ -27,7 +27,7 @@ function Createseller() {
     let res;
     e.preventDefault();
     console.log("registering user");
-    const regurl = "https://localhost:7228/api/User/register";
+    const regurl = "http://localhost:82/api/User/register";
 
     const reader = new FileReader();
 

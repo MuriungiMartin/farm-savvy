@@ -135,7 +135,7 @@ const UserDashboard = () => {
   };
 
   async function getlistings() {
-    const lUrl = `https://localhost:7228/api/Listings/list produce?username=${username}`;
+    const lUrl = `http://localhost:82/api/Listings/produce?username=${username}`;
     const response = await fetch(lUrl, {
       method: "GET",
       headers: {
@@ -163,7 +163,7 @@ const UserDashboard = () => {
   }
 
   async function getorders(listId) {
-    const lUrl = `https://localhost:7228/api/Orders/list orders listing?id=${listId}`;
+    const lUrl = `http://localhost:82/api/Orders/listing?listingId=${listId}`;
     const response = await fetch(lUrl, {
       method: "GET",
       headers: {
