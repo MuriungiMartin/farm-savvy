@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import AddProduceListing from "../listnew";
+import AddProduceListing from "./listnew";
 import { Modal } from "react-bootstrap";
-import OrderCard from "../profiles/vieworder";
+import OrderCard from "./vieworder";
 
 // const userData = {
 //   username: "JohnDoe",
@@ -212,7 +212,11 @@ const UserDashboard = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
   }
   return (
     //center the contents

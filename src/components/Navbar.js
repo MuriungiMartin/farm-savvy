@@ -3,15 +3,15 @@
 import { Form,  Modal,  ModalBody,  NavDropdown } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Weather from "./Weather";
-import UserDashboard from "./marketplace/dashboard";
-import LandingPage from "./landingpage";
+import Weather from "../components/Weather";
+import UserDashboard from "../marketplace/dashboard";
+import LandingPage from "../components/landingpage";
 import { FaHome, FaSignOutAlt } from "react-icons/fa";
-import Createseller from "./createseller";
-import UserLogin from "./userlogin";
+import Createseller from "../profiles/createseller";
+import UserLogin from "../profiles/userlogin";
 import { useEffect, useState } from "react";
-import Profile from "./profiles/profile"
-import OrderCard from "./profiles/vieworder";
+import Profile from "../profiles/profile"
+import OrderCard from "../marketplace/vieworder";
 
 function NavBar() {
 const username = localStorage.getItem("username");
