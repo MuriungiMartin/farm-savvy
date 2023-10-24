@@ -169,6 +169,54 @@ const UserDashboard = () => {
     }
   }
 
+  async function TestBcCentralRest() {
+    const url = "http://localhost:4048/BC230/ODataV4/Notification_fnSendEmailglobal?company=CRONUS International Ltd.";
+    const data = {
+      recipientName: "Mwinyi Hatibu",
+      subject: "Welcome to our platform",
+      body: "<br><br> Welcome to our platform! We are excited to have you on board. <br><br> Kind Regards, <br> Health Strat Team",
+      recipientEmail: "mmuriungi@kobby.co.ke",
+      addCC: "muriungimmwiti@gmail.com",
+      addBcc: "",
+      hasAttachment: true,
+      attachmentName: "Madafu",
+      attachmentType: "png",
+      attachmentBase64: `${image}`
+    }
+    const username = "navadmin";
+    const password = "C0d3@llD@yL0ng";
+    //fetch the api and use basic authentication
+   const response= await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic " + btoa(`${username}:${password}`)
+      },
+      body: JSON.stringify(data)
+    });
+
+    try {
+      const res = await response.json();
+      console.log(res)
+      const res2 =JSON.parse(res.value);
+      console.log(res2);
+      const status = res2.status;
+      console.log(status)
+      const sent = res2.sent;
+      const message = res2.message;
+      console.log(message);
+      console.log(sent);
+      if (res2.status === 200) {
+       // console.log(res);
+      } else {
+       toast.error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   async function getlistings() {
     const lUrl = `http://localhost:82/api/Listings/produce?username=${username}`;
     const response = await fetch(lUrl, {
@@ -201,6 +249,26 @@ const UserDashboard = () => {
     }
   }
 
+  function getUserimage()
+{
+  const url = `http://localhost:82/api/User/userImage?username=${username}`;
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  xhr.send();
+  xhr.onload = function () {
+    if (this.status === 200) {
+      setImage(this.responseText);
+    } else {
+     setImage("https://i.pravatar.cc/400?img=70");
+
+    }
+  };
+}
+
+
+
   async function getorders(listId) {
     const lUrl = `http://localhost:82/api/Orders/orders.listingid?listingid=${listId}`;
     const response = await fetch(lUrl, {
@@ -222,6 +290,7 @@ const UserDashboard = () => {
   }
 
   const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState("");
   const [user, setUser] = useState({
     userData,
   });
@@ -248,6 +317,7 @@ const UserDashboard = () => {
       // Fetch user data from an API
       await setUser(userData);
       await getlistings();
+      await getUserimage();
       setLoading(false);
       //print user data to a file
     }
@@ -347,6 +417,16 @@ const UserDashboard = () => {
                                   }
                                 >
                                   🗑️
+                                </Button>
+                              </span>
+                              <span>
+                                <Button
+                                  variant="outline-success"
+                                  className="float-right"
+                                  style={{ marginLeft: "10px" }}
+                                  onClick={TestBcCentralRest}
+                                >
+                                  📧
                                 </Button>
                               </span>
                             </div>
